@@ -1,0 +1,1 @@
+#!/bin/bash\nfor file in *~; do\n  rm \"\$file\"\ndone
