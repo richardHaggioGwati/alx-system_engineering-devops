@@ -1,0 +1,2 @@
+#!/bin/bash
+find . -type f -name "*.gif" | while read file; do filename=$(echo "$file" | rev | cut -d '.' -f 2- | rev); echo "$filename"; done | sort -f | while read line; do echo "$line.gif"; done

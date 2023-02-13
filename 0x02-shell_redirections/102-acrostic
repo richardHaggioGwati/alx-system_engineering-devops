@@ -1,0 +1,2 @@
+#!/bin/bash
+while read line; do first_letter=$(echo "$line" | head -c 1); echo -n "$first_letter"; done < input.txt; echo ""
