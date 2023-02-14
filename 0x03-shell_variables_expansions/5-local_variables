@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "Local variables:"; declare -p | grep -E '^declare -[aA]'; echo "Environment variables:"; env; echo "Functions:"; declare -F | awk '{print $3}'
