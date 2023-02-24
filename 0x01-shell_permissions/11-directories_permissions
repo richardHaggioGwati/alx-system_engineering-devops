@@ -1,2 +1,2 @@
 #!/bin/bash
-ifor subdir in */; do [ -d "$subdir" ] && chmod u+x,g+x,o+x "$subdir"; done
+chmod -R +111 */
