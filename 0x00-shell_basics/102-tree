@@ -1,1 +1,2 @@
-#!/bin/bash\nmkdir -p welcome/to/schoo
+#!/bin/bash
+mkdir -p welcome/to/school/

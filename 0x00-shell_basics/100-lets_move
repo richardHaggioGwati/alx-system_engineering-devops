@@ -1,1 +1,2 @@
-#!/bin/bash\nfor file in [A-Z]*; do\n  mv \"\$file\" /tmp/u/\ndone
+#!/bin/bash
+mv [[:upper:]]* /tmp/u
