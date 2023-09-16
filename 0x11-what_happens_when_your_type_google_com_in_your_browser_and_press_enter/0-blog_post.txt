@@ -1,0 +1,31 @@
+Title: What Happens When You Type https://www.google.com into Your Browser?
+
+Introduction:
+We often take for granted the incredible complexity underlying a simple act like typing a URL into our web browser and pressing "Enter" in the digital age. This seemingly simple action initiates a chain of events involving various components and technologies that work in unison to deliver the web page you requested. In this blog post, we will take a step-by-step look at the journey of a web request to see what happens when you type https://www.google.com into your browser.
+
+1. DNS Query:
+The first step is a DNS (Domain Name System) request when you type "https://www.google.com" and press Enter. Your browser must determine the IP address associated with the domain "www.google.com." It issues a DNS query to a DNS server, which functions as an internet phone book, converting human-readable domain names into machine-readable IP addresses.
+
+2. TCP/IP:
+When the DNS server returns the IP address of Google's servers (e.g., 172.217.7.206), your browser establishes a TCP (Transmission Control Protocol) connection. TCP ensures reliable data transmission by dividing the web page into smaller packets that are then sent over the Internet via IP (Internet Protocol). These packets will pass through several routers and networks before arriving at Google's servers.
+
+3. Firewall:
+As data packets travel across the internet, they may come across firewalls, which are security measures designed to filter and control network traffic. Firewalls can be configured at various points, ranging from your local network to the server's network, and they inspect incoming and outgoing data to protect against threats.
+
+4. HTTPS/SSL: 
+HTTPS (Hypertext Transfer Protocol Secure) and SSL (Secure Sockets Layer) or their successors, TLS (Transport Layer Security), are critical components of modern web security. When your browser connects to a website, it negotiates a secure connection using SSL or TLS. This ensures that the data exchanged between your browser and the web server is encrypted and secure, safeguarding your privacy and data integrity.
+
+5. Load-Balancer:
+Large websites like Google use load balancers to distribute incoming traffic across multiple web servers. Load balancers ensure that no single server becomes overwhelmed, improving website performance and reliability. They consider factors like server health and current load to direct your request to the most suitable server.
+
+6. Web Server:
+Once the request reaches a web server, it needs to be processed. Web servers (e.g., Apache, Nginx) handle incoming HTTP requests, execute code, and generate web pages dynamically if needed. In Google's case, they likely serve cached search results or generate them on-the-fly based on your query.
+
+7. Application Server:
+Some websites, especially those with dynamic content or complex functionalities, use application servers (e.g., Node.js, Ruby on Rails) to process user requests. These servers interact with databases, perform calculations, and generate content before sending it back to the web server.
+
+8. Database:
+Many web applications rely on databases (e.g., MySQL, PostgreSQL) to store and retrieve data. When your request involves fetching specific information (e.g., search results), the application server communicates with the database to fetch the required data. This data is then incorporated into the web page you receive.
+
+Conclusion:
+The act of typing "https://www.google.com" and pressing Enter is a journey through the intricacies of the internet and web technologies. From DNS resolution to load balancing, from secure connections to data retrieval, each step plays a crucial role in delivering the web page you requested. Understanding this process not only enriches your technical knowledge but also highlights the intricate beauty of the web's inner workings. So next time you perform this routine action, take a moment to appreciate the intricate dance of technology happening behind the scenes.
