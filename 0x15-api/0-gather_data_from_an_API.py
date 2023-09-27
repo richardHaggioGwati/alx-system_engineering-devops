@@ -3,28 +3,35 @@
 tasks and total number of tasks from an API
 '''
 
-import re
-import requests
-import sys
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python 0-gather_data_from_an_API.py <employee_id>")
+        sys.exit(1)
 
-REST_API = "https://jsonplaceholder.typicode.com"
+    employee_id = sys.argv[1]
+    base_url = "https://jsonplaceholder.typicode.com"
 
-if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        if re.fullmatch(r'\d+', sys.argv[1]):
-            id = int(sys.argv[1])
-            emp_req = requests.get('{}/users/{}'.format(REST_API, id)).json()
-            task_req = requests.get('{}/todos'.format(REST_API)).json()
-            emp_name = emp_req.get('name')
-            tasks = list(filter(lambda x: x.get('userId') == id, task_req))
-            completed_tasks = list(filter(lambda x: x.get('completed'), tasks))
-            print(
-                'Employee {} is done with tasks({}/{}):'.format(
-                    emp_name,
-                    len(completed_tasks),
-                    len(tasks)
-                )
-            )
-            if len(completed_tasks) > 0:
-                for task in completed_tasks:
-                    print('\t {}'.format(task.get('title')))
+    # Fetch user information
+    user_response = requests.get(f"{base_url}/users/{employee_id}")
+    todo_response = requests.get(f"{base_url}/todos?userId={employee_id}")
+
+    if user_response.status_code != 200:
+        print("User not found")
+        sys.exit(1)
+
+    if todo_response.status_code != 200:
+        print("TODO list not found")
+        sys.exit(1)
+
+    user_data = user_response.json()
+    todo_data = todo_response.json()
+
+    employee_name = user_data["name"]
+    total_tasks = len(todo_data)
+    completed_tasks = sum(1 for task in todo_data if task["completed"])
+    completed_task_titles = [task["title"] for task in todo_data if task["completed"]]
+
+    # Display employee TODO list progress
+    print(f"Employee {employee_name} is done with tasks({completed_tasks}/{total_tasks}):")
+    for task_title in completed_task_titles:
+        print(f"    {task_title}")
