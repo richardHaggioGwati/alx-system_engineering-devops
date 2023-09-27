@@ -3,35 +3,41 @@
 tasks and total number of tasks from an API
 '''
 
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python 0-gather_data_from_an_API.py <employee_id>")
-        sys.exit(1)
+import requests
+import sys
 
-    employee_id = sys.argv[1]
-    base_url = "https://jsonplaceholder.typicode.com"
 
-    # Fetch user information
-    user_response = requests.get(f"{base_url}/users/{employee_id}")
-    todo_response = requests.get(f"{base_url}/todos?userId={employee_id}")
+employee_id = sys.argv[1]
 
-    if user_response.status_code != 200:
-        print("User not found")
-        sys.exit(1)
+try:
+    employee_id = int(employee_id)
+except ValueError:
+    print("Invalid employee ID")
+    sys.exit()
 
-    if todo_response.status_code != 200:
-        print("TODO list not found")
-        sys.exit(1)
 
-    user_data = user_response.json()
-    todo_data = todo_response.json()
+base_url = "https://jsonplaceholder.typicode.com/"
+user_url = base_url + "users/" + str(employee_id)
+todo_url = base_url + "todos?userId=" + str(employee_id)
+user_response = requests.get(user_url).json()
+user_name = user_response.get("name")
+todo_response = requests.get(todo_url).json()
+total_tasks = 0
+done_tasks = 0
+done_titles = []
 
-    employee_name = user_data["name"]
-    total_tasks = len(todo_data)
-    completed_tasks = sum(1 for task in todo_data if task["completed"])
-    completed_task_titles = [task["title"] for task in todo_data if task["completed"]]
 
-    # Display employee TODO list progress
-    print(f"Employee {employee_name} is done with tasks({completed_tasks}/{total_tasks}):")
-    for task_title in completed_task_titles:
-        print(f"    {task_title}")
+for todo in todo_response:
+
+    total_tasks += 1
+
+    completed = todo.get("completed")
+    title = todo.get("title")
+
+    if completed:
+        done_tasks += 1
+        done_titles.append(title)
+
+print("Employee {} is done with tasks({}/{})".format(user_name, done_tasks, total_tasks))
+for title in done_titles:
+    print("\t {}".format(title))
